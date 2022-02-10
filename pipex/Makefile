@@ -1,6 +1,6 @@
 .PHONY: all clen fclean re
 
-SRCS = *.c
+SRCS = pipex.c
 
 NAME = pipex
 OBJS = ${SRCS:.c=.o}

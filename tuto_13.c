@@ -3,23 +3,28 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+
+/* int main(int argc, char **argv) */
+/* { */	
+/* 	char cmd[] = "/bin/ls"; */
+
+/* 	char *argVec[] = {"ls", NULL}; */
+/* 	char *envVec[] = {NULL}; */
+
+/* 	if (execve(cmd, argVec, envVec) == -1) */
+/* 		perror("Error"); */
+/* 	return (0); */
+/* } */
+
+
 int main(int argc, char **argv)
 {	
-	//execlp("/Users/BigZozyo/Documents/Informatique/42_projets/fdf/fdf", 
-	//	"/Users/BigZozyo/Documents/Informatique/42_projets/fdf/fdf", 
-	//	"/Users/BigZozyo/Documents/Informatique/42_projets/fdf/fdf/test_maps/mars.fdf", 
-	//	NULL); 
-	
-	execlp("fdf", 
-		"fdf", 
-		"/Users/BigZozyo/Documents/Informatique/42_projets/fdf/fdf/test_maps/mars.fdf", 
-		NULL); 
-	
-	printf("Program finished executing\n");
+	char cmd[] = ft_strjoin("/bin/ls", argv[1]);
 
+	char *argVec[] = {"", NULL};
+	char *envVec[] = {NULL};
 
-
-
-
+	if (execve(cmd, argv, envp) == -1)
+		perror("Error");
 	return (0);
 }
