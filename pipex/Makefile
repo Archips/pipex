@@ -1,6 +1,9 @@
 .PHONY: all clen fclean re
 
-SRCS = pipex.c
+SRCS = pipex.c \
+	   cmd.c \
+	   process.c \
+	   utils.c \
 
 NAME = pipex
 OBJS = ${SRCS:.c=.o}
