@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:56:18 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/11 14:05:24 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:21:11 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char	**ft_path(char **envp)
 	if (!path)
 		return (ft_error(1), NULL);
 	env_path = ft_split(path, ':');
+	free(path);
 	if (!env_path)
 		return (ft_error(1), NULL);
-	free(path);
 	return (env_path);
 }
 

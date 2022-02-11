@@ -1,4 +1,4 @@
-.PHONY: all clen fclean re
+.PHONY: all clean fclean re
 
 SRCS = pipex.c \
 	   cmd.c \
