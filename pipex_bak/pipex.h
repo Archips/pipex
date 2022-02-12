@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/12 17:54:14 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:10:16 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct	s_data
 	char		*cmd2;
 	char		**env_path;
 
-	int			freed;
-
 }				t_data;
 
 char	**ft_path(char **envp);
@@ -48,7 +46,6 @@ char	*ft_command(char *cmd, char **env_path);
 char	**arg_cmd(char *cmd);
 void	ft_open(char **argv, t_data *data);
 int		ft_error(int error);
-void	ft_free(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child1(t_data *data, char **argv, char **envp);
 void	ft_child2(t_data *data, char **argv, char **envp);
