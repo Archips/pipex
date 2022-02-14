@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/12 17:56:06 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/14 13:45:47 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5 || envp == NULL)
 		exit(EXIT_FAILURE);
 	t_data	data;
-	data.freed = 0;
 	ft_open(argv, &data);
 	if (data.fd_out < 0)
 		exit(EXIT_FAILURE);
@@ -37,8 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		ft_child2(&data, argv, envp);
 	close(data.fd[0]);
 	close(data.fd[1]);
-	if (data.freed == 1)
-		ft_free(data);
 	ft_free_tab(data.env_path);
 	waitpid(data.child1, NULL, 0);
 	waitpid(data.child2, NULL, 0);

@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/12 18:07:54 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/14 13:46:21 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,3 @@ void	ft_free_tab(char **tab)
 	temp = NULL;
 }
 
-void	ft_free(t_data *data)
-{
-	if (data->env_path)
-		ft_free_tab(data->env_path);
-	if (data->arg_cmd1)
-		ft_free_tab(data->arg_cmd1);
-	if (data->arg_cmd2)
-		ft_free_tab(data->arg_cmd2);
-	if (cmd1)
-	{
-		free(cmd1);
-		cmd1 = NULL;
-	}
-
-
-	ft_free_tab(
