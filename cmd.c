@@ -6,13 +6,13 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:56:18 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/11 15:21:11 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/15 16:39:30 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**ft_path(char **envp)
+char	**ft_get_path(char **envp)
 {
 	char	*path;
 	char	**env_path;
@@ -21,11 +21,11 @@ char	**ft_path(char **envp)
 		envp++;
 	path = ft_strdup(*envp + 5);
 	if (!path)
-		return (ft_error(1), NULL);
+		return (NULL);
 	env_path = ft_split(path, ':');
 	free(path);
 	if (!env_path)
-		return (ft_error(1), NULL);
+		return (NULL);
 	return (env_path);
 }
 
@@ -33,15 +33,17 @@ char	*ft_command(char *cmd, char **env_path)
 {
 	char	*command;
 	char	*new_path;
-
+	
+	if (access(cmd, 0) == 0)
+		return (cmd);
 	while (*env_path)
 	{
 		new_path = ft_strjoin(*env_path, "/");
 		if (!new_path)
-			return (ft_error(1), NULL);
+			return (NULL);
 		command = ft_strjoin(new_path, cmd);
 		if (!command)
-			return (ft_error(1), NULL);
+			return (NULL);
 		if (access(command, 0) == 0)
 		{
 			free(new_path);
@@ -54,12 +56,12 @@ char	*ft_command(char *cmd, char **env_path)
 	return (NULL);
 }
 
-char	**arg_cmd(char *cmd)
+char	**ft_arg_cmd(char *cmd)
 {
 	char	**arg_cmd;
 
 	arg_cmd = ft_split(cmd, ' ');
 	if (!arg_cmd)
-		return (ft_error(1), NULL);
+		return (NULL);
 	return (arg_cmd);
 }

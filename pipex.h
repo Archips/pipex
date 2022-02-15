@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/12 17:54:14 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:11:24 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,32 @@
 
 typedef struct	s_data
 {
+	int			ac;
+	char		**av;
+	char		**env;
+
+	char		*prog_name;
+
 	int			fd[2];
-	int			fd_in;
-	int			fd_out;
+	int			file_in;
+	int			file_out;
 
-	pid_t		child1;
-	pid_t		child2;
+	pid_t		child[2];
 
-	char		**arg_cmd1;
-	char		**arg_cmd2;
-	char		*cmd1;
-	char		*cmd2;
+	char		**arg_cmd[2];
+	char		*cmd[2];
 	char		**env_path;
-
-	int			freed;
-
 }				t_data;
 
-char	**ft_path(char **envp);
+char	**ft_get_path(char **envp);
 char	*ft_command(char *cmd, char **env_path);
-char	**arg_cmd(char *cmd);
+char	**ft_arg_cmd(char *cmd);
+void	ft_init_path(int argc, char **argv, char **envp, t_data *data);
 void	ft_open(char **argv, t_data *data);
-int		ft_error(int error);
+void	ft_exit(t_data *data, int error, int cmd_id);
 void	ft_free(t_data *data);
 void	ft_free_tab(char **tab);
-void	ft_child1(t_data *data, char **argv, char **envp);
-void	ft_child2(t_data *data, char **argv, char **envp);
+void	ft_child1(t_data *data);
+void	ft_child2(t_data *data);
 
 #endif
