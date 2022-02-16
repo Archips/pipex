@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/15 17:11:24 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:49:23 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include "libft/libft.h"
-
-# define ERR_1 "Malloc Error"
 
 typedef struct	s_data
 {
@@ -46,10 +44,10 @@ typedef struct	s_data
 char	**ft_get_path(char **envp);
 char	*ft_command(char *cmd, char **env_path);
 char	**ft_arg_cmd(char *cmd);
-void	ft_init_path(int argc, char **argv, char **envp, t_data *data);
+void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
 void	ft_open(char **argv, t_data *data);
 void	ft_exit(t_data *data, int error, int cmd_id);
-void	ft_free(t_data *data);
+void	ft_free_all(t_data *data, int cmd_id);
 void	ft_free_tab(char **tab);
 void	ft_child1(t_data *data);
 void	ft_child2(t_data *data);
