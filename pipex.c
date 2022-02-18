@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 11:47:50 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:16:30 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,24 @@
 
 int	ft_pipex(t_data *data, int status)
 {
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (pipe(data->fd) == -1)
 		ft_exit(data, errno, -1);
 	data->child[0] = fork();
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (data->child[0] == -1)
 		ft_exit(data, errno, -1);
 	if (data->child[0] == 0)
 		ft_child1(data);
 	data->child[1] = fork();
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (data->child[1] == -1)
 		ft_exit(data, errno, -1);
 	if (data->child[1] == 0)
 		ft_child2(data);
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (close(data->fd[0]) == 1)
 		ft_exit(data, errno, 0);
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (close(data->fd[1]) == 1)
 		ft_exit(data, errno, 0);
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (waitpid(data->child[0], NULL, 0) == -1)
 		ft_exit(data, errno, 1);
-/* +++++++++++++++++++++++++++= GOOD =+++++++++++++++++++++++++++ */
 	if (waitpid(data->child[1], &status, 0) == -1)
 		ft_exit(data, errno, 1);
 	if (WIFEXITED(status))
