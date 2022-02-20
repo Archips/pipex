@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 14:43:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/18 22:40:06 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
+
+# ifndef
+# define LIMITER stop
+# endif
 
 typedef struct	s_data
 {
@@ -28,7 +32,7 @@ typedef struct	s_data
 	char		**av;
 	char		**env;
 
-	int			cmd_id;
+	int			here_doc;
 
 	char		*prog_name;
 
@@ -36,7 +40,7 @@ typedef struct	s_data
 	int			file_in;
 	int			file_out;
 
-	pid_t		child[2];
+	pid_t		*pipe;
 
 	char		**arg_cmd[2];
 	char		*cmd[2];
@@ -53,5 +57,28 @@ void	ft_free_all(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child1(t_data *data);
 void	ft_child2(t_data *data);
+
+
+/*
+ * * * here_doc_bonus.c
+ */
+
+void	ft_is_heredoc(t_data *data);
+void	ft_here_doc(t_data *data);
+
+
+/*
+ * * *  get_next_line.c
+ */
+
+char	*ft_update_temp(char *temp);
+char	*ft_get_line(char *temp);
+char	*get_next_line(int fd);
+char	*ft_strjoin_free(char *s1, char *s2);
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
+int		ft_is_nl(char *str);
+int		ft_len_newline(char *str);
+size_t	ft_getlen(const char *s)
+
 
 #endif
