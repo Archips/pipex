@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:16:05 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 14:02:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:07:36 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_is_heredoc(t_data *data)
 		return (1);
 	}
 	data->here_doc = 0;
-	return (0);	
+	return (0);
 }
 
 void	ft_here_doc(t_data *data)
@@ -45,10 +45,7 @@ void	ft_here_doc(t_data *data)
 	free(temp);
 	ft_close(data, fd_file);
 	data->file_in = open(".temp_here_doc", O_RDONLY);
-
 	unlink(".temp_here_doc");
 	if (data->file_in == -1)
-	{
 		ft_exit(data, errno, -1);
-	}
 }

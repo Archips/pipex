@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 14:01:16 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:10:26 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	if (!data->pipe)
 		ft_exit(data, errno, -1);
 	data->env_path = ft_get_path(data->env);
-	index = data->ac - 3;
+	if (data->here_doc)
+		index = 3;
+	else
+		index = 2;
 	while (index < data->ac - 1)
 	{
 		data->arg_cmd[id] = ft_arg_cmd(data->av[index]);
