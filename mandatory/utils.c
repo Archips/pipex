@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 15:17:20 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 09:50:01 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 {
 	int	index;
-	int id = 0;
 
+	id = 0;
 	data->ac = argc;
 	data->av = argv;
 	data->env = envp;
@@ -35,16 +35,16 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 void	ft_open(t_data *data)
 {
 	data->file_in = open(data->av[1], O_RDONLY);
-	data->file_out =
-		open(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
+	data->file_out = open
+		(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (data->file_out == -1)
 		ft_exit(data, errno, -1);
 }
 
 void	ft_free_all(t_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	ft_free_tab(data->env_path);
 	while (i < data->cmd_id)
@@ -66,7 +66,7 @@ void	ft_free_tab(char **tab)
 		*tab = NULL;
 		tab ++;
 	}
-	free(temp); 
+	free(temp);
 	temp = NULL;
 }
 

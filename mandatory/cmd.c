@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:56:18 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 17:16:09 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 09:45:43 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_command(char *cmd, char **env_path)
 	if (access(cmd, 0) == 0)
 	{
 		command = ft_strdup(cmd);
-		return (command);	
+		return (command);
 	}
 	while (*env_path)
 	{

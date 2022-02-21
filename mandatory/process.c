@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:57:43 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 17:08:23 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 09:46:45 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	ft_child2(t_data *data)
 	if (execve(data->cmd[1], data->arg_cmd[1], data->env) == -1)
 		ft_exit(data, 127, 1);
 }
-
