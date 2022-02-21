@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 13:24:14 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:21:04 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ typedef struct	s_data
 	int			nb_cmd;
 	int			cmd_id;
 
+	int			**pipe;
+
 	int			here_doc;
 
 	char		*prog_name;
 
 	pid_t		child[2];
-
+	
 	int			fd[2];
 	int			file_in;
 	int			file_out;
-
-	pid_t		*pipe;
 
 	char		**arg_cmd[2];
 	char		*cmd[2];
@@ -64,6 +64,7 @@ void	ft_open(t_data *data);
 void	ft_close(t_data *data, int fd);
 void	ft_exit(t_data *data, int error, int cmd_id);
 void	ft_free_all(t_data *data);
+void	ft_free_pipe(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child1(t_data *data);
 void	ft_child2(t_data *data);

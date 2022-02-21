@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 13:40:49 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:56:03 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ int	main(int argc, char **argv, char **envp)
 			exit(EXIT_FAILURE);
 		ft_init_data(argc, argv, envp, &data);
 		status = ft_pipex(&data, status);
+		if (close(data.file_in) == 1)
+			ft_exit(&data, errno, 0);
+		if (close(data.file_out) == 1)
+			ft_exit(&data, errno, 0);
 		ft_free_all(&data);
 		exit(status);
 	}
