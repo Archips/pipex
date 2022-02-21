@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 09:50:01 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 10:28:52 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 {
 	int	index;
+	int	id;
 
 	id = 0;
 	data->ac = argc;

@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 19:22:50 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:01:16 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 {
 	int	index;
-	int id = 0;
+	int	id;
 
+	id = 0;
 	data->ac = argc;
 	data->av = argv;
 	data->env = envp;
 	ft_get_filenames(data);
 	data->nb_cmd = data->ac - 3;
-	data->pipe = (pid_t *)malloc(sizeof(pid_t) * (data->nb_cmd + 1));
+//	data->pipe = (pid_t *)malloc(sizeof(pid_t) * (data->nb_cmd + 1));
 	if (!data->pipe)
 		ft_exit(data, errno, -1);
 	data->env_path = ft_get_path(data->env);
@@ -39,40 +40,29 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 
 void	ft_open(t_data *data)
 {
-	data->file_in = open(data->av[1], O_RDONLY);
-	data->file_out =
-		open(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if (data->file_out == -1)
+	if (!data->here_doc)
+	{
+		data->file_in = open(data->av[1], O_RDONLY);
+		if (data->file_in == -1)
+			ft_exit(data, errno, -1);
+		data->file_out = open
+			(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
+		if (data->file_out == -1)
+			ft_exit(data, errno, -1);
+	}
+	else
+	{
+		data->file_out = open
+			(data->av[data->ac - 1], O_CREAT | O_APPEND | O_RDWR, 0644);
+		if (data->file_out == -1)
+			ft_exit(data, errno, -1);
+	}
+}
+
+void	ft_close(t_data *data, int fd)
+{
+	if (close(fd) == -1)
 		ft_exit(data, errno, -1);
-}
-
-void	ft_free_all(t_data *data)
-{
-	int i;
-	
-	i = 0;
-	ft_free_tab(data->env_path);
-	while (i < data->cmd_id)
-	{
-		free(data->cmd[i]);
-		ft_free_tab(data->arg_cmd[i]);
-		i ++;
-	}
-}
-
-void	ft_free_tab(char **tab)
-{
-	char	**temp;
-
-	temp = tab;
-	while (*tab)
-	{
-		free(*tab);
-		*tab = NULL;
-		tab ++;
-	}
-	free(temp); 
-	temp = NULL;
 }
 
 void	ft_exit(t_data *data, int error, int cmd_id)

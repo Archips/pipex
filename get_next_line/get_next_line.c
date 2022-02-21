@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:58:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 22:34:55 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:24:52 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 char	*ft_update_temp(char *temp)
 {
 	int		len;
-	int		i;
 	char	*new_temp;
 
-	i = 0;
 	len = ft_len_newline(temp);
 	if (temp[len] == '\0')
 		return (free(temp), NULL);
-	new_temp = ft_substr(temp, len, ft_strlen(temp) - len);
+	new_temp = ft_substr_gnl(temp, len, ft_strlen(temp) - len);
 	if (!new_temp)
 		return (free(temp), NULL);
 	free(temp);
@@ -38,7 +36,7 @@ char	*ft_get_line(char *temp)
 	if (temp[0] == '\0')
 		return (NULL);
 	len = ft_len_newline(temp);
-	line = ft_substr(temp, 0, len);
+	line = ft_substr_gnl(temp, 0, len);
 	if (!line)
 		return (NULL);
 	return (line);
@@ -63,7 +61,7 @@ char	*get_next_line(int fd)
 		if (ret == -1)
 			return (free(buf), NULL);
 		buf[ret] = '\0';
-		temp = ft_strjoin(temp, buf);
+		temp = ft_strjoin_free(temp, buf);
 	}
 	free(buf);
 	if (!temp)
@@ -72,3 +70,23 @@ char	*get_next_line(int fd)
 	temp = ft_update_temp(temp);
 	return (line);
 }
+
+
+/* int main(void) */
+/* { */
+/* 	char *temp; */
+
+/* 	int file = open("test", O_CREAT | O_RDWR, 000644); */
+
+/* 	while (1) */
+/* 	{ */
+/* 		write(1, "pipe heredoc> ", 14); */
+/* 		temp = get_next_line(0); */
+/* 		if (!strncmp(temp, "ok", 2)) */
+/* 			break ; */
+/* 		write(file, temp, strlen(temp)); */
+/* 		free(temp); */
+/* 	} */
+/* 	/1* free(temp); *1/ */
+/* 	return (0); */
+/* } */

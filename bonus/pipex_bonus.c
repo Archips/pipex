@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 17:34:45 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:40:49 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	ft_pipex(t_data *data, int status)
 		ft_exit(data, errno, 1);
 	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
-	return(status);
+	return (status);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	int		status;
 
 	data.prog_name = ft_strrchr(argv[0], '/') + 1;
 	status = 1;
-	if (argc == 5)
+	if (argc >= 5)
 	{
 		status = 0;
 		if (!envp)

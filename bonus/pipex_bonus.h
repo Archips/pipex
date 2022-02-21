@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 22:40:06 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:24:14 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 # include <sys/wait.h>
 # include "../libft/libft.h"
 
-# ifndef
-# define LIMITER stop
+# ifndef LIMITER
+# define LIMITER "stop"
+# endif
+
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
 # endif
 
 typedef struct	s_data
@@ -32,9 +36,14 @@ typedef struct	s_data
 	char		**av;
 	char		**env;
 
+	int			nb_cmd;
+	int			cmd_id;
+
 	int			here_doc;
 
 	char		*prog_name;
+
+	pid_t		child[2];
 
 	int			fd[2];
 	int			file_in;
@@ -52,18 +61,25 @@ char	*ft_command(char *cmd, char **env_path);
 char	**ft_arg_cmd(char *cmd);
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
 void	ft_open(t_data *data);
+void	ft_close(t_data *data, int fd);
 void	ft_exit(t_data *data, int error, int cmd_id);
 void	ft_free_all(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child1(t_data *data);
 void	ft_child2(t_data *data);
 
+/*
+ * * * files_bonus.c
+ */
+
+void	ft_get_filenames(t_data *data);
+
 
 /*
  * * * here_doc_bonus.c
  */
 
-void	ft_is_heredoc(t_data *data);
+int		ft_is_heredoc(t_data *data);
 void	ft_here_doc(t_data *data);
 
 
@@ -78,7 +94,6 @@ char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
 int		ft_is_nl(char *str);
 int		ft_len_newline(char *str);
-size_t	ft_getlen(const char *s)
 
 
 #endif

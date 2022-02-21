@@ -7,11 +7,13 @@ SRCS = mandatory/pipex.c \
 
 SRCS_BONUS = bonus/pipex_bonus.c \
 			 bonus/cmd_bonus.c \
+			 bonus/files_bonus.c \
+			 bonus/free_bonus.c \
 			 bonus/process_bonus.c \
 			 bonus/utils_bonus.c \
 			 bonus/here_doc_bonus.c \
 			 get_next_line/get_next_line.c \
-			 get_mext_line/get_next_line_utils.c \
+			 get_next_line/get_next_line_utils.c \
 
 NAME = pipex
 OBJS = ${SRCS:.c=.o}

@@ -6,21 +6,11 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:58:12 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/18 22:35:16 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:21:29 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../bonus/pipex_bonus.h"
-
-size_t	ft_getlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i ++;
-	return (i);
-}
 
 int	ft_len_newline(char *str)
 {
@@ -57,7 +47,7 @@ char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	if (start > ft_getlen(s))
+	if (start > ft_strlen(s))
 	{
 		substr = (char *)malloc(sizeof(char) * 1);
 		if (!substr)
@@ -84,11 +74,11 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	int			len_s2;
 
 	if (!s1)
-		return (ft_substr_gnl(s2, 0, ft_getlen(s2)));
+		return (ft_substr_gnl(s2, 0, ft_strlen(s2)));
 	if (!s1 || !s2)
 		return (NULL);
-	len_s1 = ft_getlen(s1);
-	len_s2 = ft_getlen(s2);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (!str)
 		return (NULL);
