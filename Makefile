@@ -1,4 +1,4 @@
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
 
 SRCS = mandatory/pipex.c \
 	   mandatory/cmd.c \
