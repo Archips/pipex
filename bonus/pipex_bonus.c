@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 09:40:45 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/22 16:19:48 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:06:43 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_init_pipe(t_data *data)
 	{
 		data->pipe[i] = (int *)malloc(sizeof(int) * 2);
 		if (!data->pipe[i])
-		/* free( anterior pipe) */	
+			/* free( anterior pipe) */	
 			exit(EXIT_FAILURE);
 		if (pipe(data->pipe[i]) == -1)
 			exit(EXIT_FAILURE);
@@ -72,7 +72,7 @@ char	**ft_init_path(char **envp)
 {
 	char	*path;
 	char	**env_path;
-	
+
 	while (ft_strncmp("PATH", *envp, 4))
 		envp++;
 	path = ft_strdup(*envp + 5);
@@ -87,39 +87,39 @@ char	**ft_init_path(char **envp)
 
 char    *ft_command(char *cmd, char **env_path)
 {
-        char    *command;
-        char    *new_path;
+	char    *command;
+	char    *new_path;
 
-        if (access(cmd, 0) == 0)
-        {
-                command = ft_strdup(cmd);
-                return (command);
-        }
-        while (*env_path)
-        {
-                new_path = ft_strjoin(*env_path, "/");
-                if (!new_path)
-                        return (NULL);
-                command = ft_strjoin(new_path, cmd);
-                if (access(command, 0) == 0)
-                {
-                        free(new_path);
-                        return (command);
-                }
-                env_path ++;
-                free(new_path);
-                free(command);
-        }
-        return (NULL);
+	if (access(cmd, 0) == 0)
+	{
+		command = ft_strdup(cmd);
+		return (command);
+	}
+	while (*env_path)
+	{
+		new_path = ft_strjoin(*env_path, "/");
+		if (!new_path)
+			return (NULL);
+		command = ft_strjoin(new_path, cmd);
+		if (access(command, 0) == 0)
+		{
+			free(new_path);
+			return (command);
+		}
+		env_path ++;
+		free(new_path);
+		free(command);
+	}
+	return (NULL);
 }
 
 char    **ft_arg_cmd(char *cmd)
 {
-        char    **arg_cmd;
-        arg_cmd = ft_split(cmd, ' ');
-        if (!arg_cmd)
-                return (NULL);
-        return (arg_cmd);
+	char    **arg_cmd;
+	arg_cmd = ft_split(cmd, ' ');
+	if (!arg_cmd)
+		return (NULL);
+	return (arg_cmd);
 }
 
 
@@ -199,24 +199,31 @@ int	ft_pipex(t_data *data, int status)
 			printf("Entering child[%d]\n", i);
 			while (j < data->nb_cmd)
 			{
+				printf("data->nb_cmd = %d\n", data->nb_cmd);
+				printf("j = %d && i = %d\n", j, i);
 				if (i != j)
+				{
 					if (close(data->pipe[j][0]) == -1) 
 					{
 						perror("close 0");
 						exit(EXIT_FAILURE);
 					}
+				}
 				if (i + 1 != j)
+				{
 					if (close(data->pipe[j][1]) == -1)
 					{
 						perror("close 1");
 						exit(EXIT_FAILURE);
 					}
+				}
 				j ++;
 			}
+			printf("helloeeeee\n");
 			j = 0;
-			printf("FINALLY\n");
 			if (i == 0)
 			{
+				printf("hello\n");
 				printf("i = 0 = [%d]\n", i);
 				ft_open(data);
 				if (close(data->pipe[i][0]) == -1 || close(data->file_out) == -1)
@@ -248,7 +255,7 @@ int	ft_pipex(t_data *data, int status)
 				}
 				ft_dup(data->pipe[i][0], data->file_out);
 				if (close(data->pipe[i][0]) == -1 
-					|| close(data->pipe[i + 1][0]) == -1)
+						|| close(data->pipe[i + 1][0]) == -1)
 				{
 					perror("close 6");
 					exit(EXIT_FAILURE);
@@ -269,20 +276,10 @@ int	ft_pipex(t_data *data, int status)
 				perror("execve");
 				exit(127);
 			}
+			i ++;
 		}
-		i ++;
-	}
-	i = 0;
-	while (i < data->nb_cmd)
-	{
-		if (waitpid(data->child[i], &status, 0) == -1)
-			return (19);
-			//	exit(EXIT_FAILURE);
-		//if (WIFEXITED(status))
-		//	status = WEXITSTATUS(status);
-		i ++;
-	}
-//	return (20);
+	}	
+	return (status);
 }
 
 
@@ -290,6 +287,7 @@ int main(int argc, char **argv, char **envp)
 {
 	t_data 	data;
 	int		status;
+	int		i;
 
 	data.prog_name = ft_strrchr(argv[0], '/') + 1;
 	status = 1;
@@ -298,6 +296,28 @@ int main(int argc, char **argv, char **envp)
 		ft_init_struct(&data, argc, argv, envp);
 		printf("C'est fini pour l'init\n");
 		status = ft_pipex(&data, status);
+		i = 0;
+		while (i < data.nb_cmd)
+		{
+			wait(NULL);
+			i ++;
+		}
+		/* { */
+		/* 	printf("wait for child[%d] to finish\n", i); */
+		/* 	if (i < data.nb_cmd - 1) */
+		/* 	{ */	
+		/* 		if (waitpid(data.child[i], NULL, 0) == -1) */
+		/* 		{ */
+		/* 			perror("waitpid"); */
+		/* 			exit(EXIT_FAILURE); */
+		/* 		} */
+		/* 	} */
+		/* 	else */
+		/* 		waitpid(data.child[i], &status, 0); */
+		/* 	if (WIFEXITED(status)) */
+		/* 		status = WEXITSTATUS(status); */
+		/* 	i ++; */
+		/* } */
 		exit(status);
 	}
 	ft_putstr_fd(data.prog_name, 2);
