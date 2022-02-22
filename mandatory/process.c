@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:57:43 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 10:32:15 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:04:11 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_child2(t_data *data)
 {
 	ft_open(data);
 	if (data->file_in > 0)
-		if (close(data->file_in) < 0)
+		if (close(data->file_in) == -1)
 			ft_exit(data, EXIT_FAILURE, 0);
 	if (close(data->fd[1]) == -1)
 		ft_exit(data, EXIT_FAILURE, 0);
