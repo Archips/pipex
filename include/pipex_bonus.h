@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 15:46:20 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 22:11:03 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct	s_data
 
 	int			nb_cmd;
 	int			cmd_id;
-
-	int			**pipe;
 
 	int			here_doc;
 
@@ -79,14 +77,15 @@ void	ft_exit(t_data *data, int error, int cmd_id);
 void	ft_free_all(t_data *data);
 void	ft_free_pipe(t_data *data);
 void	ft_free_tab(char **tab);
-void	ft_child1(t_data *data);
-void	ft_child2(t_data *data);
+void	ft_child(t_data *data, int i);
+//void	ft_child1(t_data *data);
+//void	ft_child2(t_data *data);
 
 /*
  * * * files_bonus.c
  */
 
-void	ft_get_filenames(t_data *data);
+void	ft_get_files_fd(t_data *data);
 
 
 /*

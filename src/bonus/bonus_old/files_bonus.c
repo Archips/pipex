@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 21:59:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 16:50:08 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 22:23:56 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_get_infile_fd(t_data *data)
 {
-	if (ft_is_heredoc(data) && data->ac == 6)
+	if (ft_is_heredoc(data) && data->ac >= 6)
 		ft_here_doc(data);
 	else
 	{
@@ -36,7 +36,7 @@ void	ft_get_outfile_fd(t_data *data)
 		ft_exit(data, errno, -1);
 }
 
-void	ft_get_filenames(t_data *data)
+void	ft_get_files_fd(t_data *data)
 {
 	ft_get_infile_fd(data);
 	ft_get_outfile_fd(data);
