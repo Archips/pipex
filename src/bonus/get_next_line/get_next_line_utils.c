@@ -6,11 +6,11 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 14:58:12 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 12:21:29 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:41:22 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../bonus/pipex_bonus.h"
+#include "pipex_bonus.h"
 
 int	ft_len_newline(char *str)
 {

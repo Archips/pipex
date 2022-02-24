@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 18:21:01 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:43:08 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 		id ++;
 	}
 	data->cmd_id = id;
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i ++;
+	}
+	write(fd, "\n", 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i ++;
+	}
 }
 
 void	ft_init_pipe(t_data *data)

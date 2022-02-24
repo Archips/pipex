@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 10:28:52 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:42:10 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,31 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	data->cmd_id = id;
 }
 
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i ++;
+	}
+	write(fd, "\n", 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i ++;
+	}
+}
+
 void	ft_open(t_data *data)
 {
 	data->file_in = open(data->av[1], O_RDONLY);
@@ -40,35 +65,6 @@ void	ft_open(t_data *data)
 		(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (data->file_out == -1)
 		ft_exit(data, errno, -1);
-}
-
-void	ft_free_all(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	ft_free_tab(data->env_path);
-	while (i < data->cmd_id)
-	{
-		free(data->cmd[i]);
-		ft_free_tab(data->arg_cmd[i]);
-		i ++;
-	}
-}
-
-void	ft_free_tab(char **tab)
-{
-	char	**temp;
-
-	temp = tab;
-	while (*tab)
-	{
-		free(*tab);
-		*tab = NULL;
-		tab ++;
-	}
-	free(temp);
-	temp = NULL;
 }
 
 void	ft_exit(t_data *data, int error, int cmd_id)

@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:58:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 13:43:49 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:41:09 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,3 @@ char	*get_next_line(int fd)
 	temp = ft_update_temp(temp);
 	return (line);
 }
-
-
-/* int main(void) */
-/* { */
-/* 	char *temp; */
-
-/* 	int file = open("test", O_CREAT | O_RDWR, 000644); */
-
-/* 	while (1) */
-/* 	{ */
-/* 		write(1, "pipe heredoc> ", 14); */
-/* 		temp = get_next_line(0); */
-/* 		if (!strncmp(temp, "ok", 2)) */
-/* 			break ; */
-/* 		write(file, temp, strlen(temp)); */
-/* 		free(temp); */
-/* 	} */
-/* 	/1* free(temp); *1/ */
-/* 	return (0); */
-/* } */

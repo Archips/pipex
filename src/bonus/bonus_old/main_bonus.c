@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/21 17:56:03 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:44:57 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 
 	data.prog_name = ft_strrchr(argv[0], '/') + 1;
 	status = 1;
-	if (argc >= 5)
+	if (argc >= 5) // + ft_is_heredoc(&data, argv[1]))
 	{
 		status = 0;
 		if (!envp)

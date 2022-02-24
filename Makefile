@@ -4,8 +4,8 @@
 NAME		= pipex
 
 # TODO set libriaires
-LIB_DIR		= lib
-LIB			= libft
+LIB_DIR		= 
+LIB			= 
 LIB			:= $(LIB:%=$(LIB_DIR)/%)
 
 # TODO set frameworks
@@ -18,16 +18,33 @@ INC			= $(INC_DIR) \
 # TODO set sources
 SRC_DIR		= src
 SRCS		= mandatory/cmd.c						\
+			  mandatory/free.c						\
 			  mandatory/pipex.c						\
 			  mandatory/process.c					\
+			  mandatory/split.c						\
+			  mandatory/string.c					\
 			  mandatory/utils.c						
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
 OBJ_DIR 	= obj
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-BIN_DIR		= bin
-BIN			= $(BIN_DIR)/$(NAME)
+SRC_BONUS_DIR		= src/bonus
+SRCS_BONUS			= bonus_old/cmd_bonus.c					\
+					  bonus_old/files_bonus.c				\
+					  bonus_old/free_bonus.c				\
+					  bonus_old/here_doc_bonus.c			\
+					  bonus_old/pipex_bonus.c				\
+					  bonus_old/process_bonus.c				\
+					  bonus_old/string_bonus.c				\
+					  bonus_old/split_bonus.c				\
+					  bonus_old/utils_bonus.c				\
+					  get_next_line/get_next_line.c			\
+					  get_next_line/get_next_line_utils.c	
+SRCS_BONUS			:= $(SRCS_BONUS:%=$(SRC_BONUS_DIR)/%)
+
+OBJ_BONUS_DIR	 	= obj
+OBJS_BONUS			= $(SRCS_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJ_BONUS_DIR)/%.o)
 
 # ========== [ Compiler flags ]
 #
@@ -55,20 +72,29 @@ MAKE	= make -C
 
 # ========== [ Recipe ]
 
-all: $(BIN)
+all: $(NAME)
 
 debug: CPPFLAGS	+= -D PINFO=1
-debug: BIN := $(BIN)-debug
-debug: $(BIN)
+debug: NAME := $(NAME)-debug
+debug: $(NAME)
 
 sanitizer: CFLAGS += -fsanitize=address,undefined,signed-integer-overflow
 sanitizer: debug
 
-$(BIN): $(OBJS)
+$(NAME): $(OBJS)
 	@for f in $(LIB); do $(MAKE) $$f --no-print-directory; done
-	@[ ! -d $(BIN_DIR) ] && mkdir -p $(BIN_DIR) || true
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(BIN)
-	@$(ECHO)"$(G)created $(END)$(BIN)\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+	@$(ECHO)"$(G)created $(END)$(NAME)\n"
+
+bonus: $(OBJS_BONUS)
+	@for f in $(LIB); do $(MAKE) $$f --no-print-directory; done
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS_BONUS) $(LDLIBS) -o $(NAME)
+	@$(ECHO)"$(G)created $(END)$(NAME)\n"
+
+$(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
+	@[ ! -d $(@D) ] && mkdir -p  $(@D) || true
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(ECHO)"$(G)created $(END)$@"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@[ ! -d $(@D) ] && mkdir -p  $(@D) || true
@@ -82,8 +108,8 @@ clean:
 
 fclean: clean
 	@for f in $(LIB); do $(MAKE) $$f fclean --no-print-directory; done
-	@[ -d $(BIN_DIR) ] \
-		&& $(RM) $(BIN_DIR) && $(ECHO)"$(R)removed$(END) $(BIN_DIR)/\n" || true
+	@[ -f $(NAME) ] \
+		&& $(RM) $(NAME) && $(ECHO)"$(R)removed$(END) $(NAME)/\n" || true
 
 norm:
 	@for f in $(LIB); do $(MAKE) $$f norm --no-print-directory; done
