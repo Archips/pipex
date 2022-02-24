@@ -1,43 +1,115 @@
-.PHONY: all clean fclean re
+# ========== [ Project files ]
 
-SRCS = mandatory/pipex.c \
-	   mandatory/cmd.c \
-	   mandatory/process.c \
-	   mandatory/utils.c \
+# TODO set name
+NAME		= pipex
 
-SRCS_BONUS = bonus/pipex_bonus.c \
-			 bonus/cmd_bonus.c \
-			 bonus/files_bonus.c \
-			 bonus/free_bonus.c \
-			 bonus/process_bonus.c \
-			 bonus/utils_bonus.c \
-			 bonus/here_doc_bonus.c \
-			 get_next_line/get_next_line.c \
-			 get_next_line/get_next_line_utils.c \
+# TODO set libriaires
+LIB_DIR		= lib
+LIB			= libft
+LIB			:= $(LIB:%=$(LIB_DIR)/%)
 
-NAME = pipex
-OBJS = ${SRCS:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -rf
+# TODO set frameworks
+FRAMEWORK	=
 
-all : ${NAME}
+INC_DIR		= include
+INC			= $(INC_DIR) \
+			  $(LIB:%=%/$(INC_DIR))
 
-${NAME} : ${OBJS}
-	@make -C libft
-	@make clean -C libft
-	${CC} ${CFLAGS} ${OBJS} -L libft -lft -o ${NAME}
+# TODO set sources
+SRC_DIR		= src
+SRCS		= mandatory/cmd.c						\
+			  mandatory/pipex.c						\
+			  mandatory/process.c					\
+			  mandatory/utils.c						
+SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
-bonus : ${OBJS_BONUS}
-	@make -C libft
-	@make clean -C libft
-	${CC} ${CFLAGS} ${OBJS_BONUS} -L libft -lft -o ${NAME}
+OBJ_DIR 	= obj
+OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+BIN_DIR		= bin
+BIN			= $(BIN_DIR)/$(NAME)
+
+# ========== [ Compiler flags ]
+#
+# Add a flag via the command line: 'make target VAR=flag'.
+
+CC			= gcc
+
+# TODO set extra compiler flags
+CFLAGS		=
+
+# TODO set extra linker flags
+CPPFLAGS	=
+LDFLAGS		=
+LDLIBS		=
+
+CFLAGS		+= -Wall -Wextra -Werror        									# -Wconversion  -Wsign-conversion
+CPPFLAGS	+= $(INC:%=-I%)
+LDFLAGS 	+= $(LIB:%=-L%) $(FRAMEWORK)
+LDLIBS		+= $(LIB:$(LIB_DIR)/lib%=-l%)
+
+# ========== [ Misc ]
+
+RM		= rm -rf
+MAKE	= make -C
+
+# ========== [ Recipe ]
+
+all: $(BIN)
+
+debug: CPPFLAGS	+= -D PINFO=1
+debug: BIN := $(BIN)-debug
+debug: $(BIN)
+
+sanitizer: CFLAGS += -fsanitize=address,undefined,signed-integer-overflow
+sanitizer: debug
+
+$(BIN): $(OBJS)
+	@for f in $(LIB); do $(MAKE) $$f --no-print-directory; done
+	@[ ! -d $(BIN_DIR) ] && mkdir -p $(BIN_DIR) || true
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(BIN)
+	@$(ECHO)"$(G)created $(END)$(BIN)\n"
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@[ ! -d $(@D) ] && mkdir -p  $(@D) || true
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(ECHO)"$(G)created $(END)$@"
 
 clean:
-	${RM} ${OBJS} ${OBJS_BONUS}
+	@for f in $(LIB); do $(MAKE) $$f clean --no-print-directory; done
+	@[ -d $(OBJ_DIR) ] \
+		&& $(RM) $(OBJ_DIR) && $(ECHO)"$(R)removed$(END) $(OBJ_DIR)/\n" || true
 
 fclean: clean
-	${RM} ${NAME}
+	@for f in $(LIB); do $(MAKE) $$f fclean --no-print-directory; done
+	@[ -d $(BIN_DIR) ] \
+		&& $(RM) $(BIN_DIR) && $(ECHO)"$(R)removed$(END) $(BIN_DIR)/\n" || true
 
-re: fclean all
+norm:
+	@for f in $(LIB); do $(MAKE) $$f norm --no-print-directory; done
+	@norminette -R CheckForbiddenSourceHeader $(SRCS) | grep -v "OK" || true
+	@$(ECHO)"$(G)checked$(END) sources\n"
+	@norminette -R CheckDefine $(INC_DIR) | grep -v "OK" || true
+	@$(ECHO)"$(G)checked$(END) headers\n"
+
+update:
+	@git pull
+	@git submodule update
+	@$(ECHO)"$(G)updated$(END)\n"
+
+re : fclean all
+
+.PHONY: all debug clean fclean norm update re
+
+# ========== [ Stdout ]
+
+R		= $(shell tput setaf 1)
+G		= $(shell tput setaf 2)
+Y		= $(shell tput setaf 3)
+B		= $(shell tput setaf 4)
+M		= $(shell tput setaf 5)
+C		= $(shell tput setaf 6)
+W		= $(shell tput setaf 7)
+K		= $(shell tput setaf 8)
+END		= $(shell tput sgr0)
+ECHO	= echo -n "\r\033[K$(NAME): "
