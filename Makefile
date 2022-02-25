@@ -30,15 +30,15 @@ OBJ_DIR 	= obj
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_BONUS_DIR		= src/bonus
-SRCS_BONUS			= bonus_old/cmd_bonus.c					\
-					  bonus_old/files_bonus.c				\
-					  bonus_old/free_bonus.c				\
-					  bonus_old/here_doc_bonus.c			\
-					  bonus_old/pipex_bonus.c				\
-					  bonus_old/process_bonus.c				\
-					  bonus_old/string_bonus.c				\
-					  bonus_old/split_bonus.c				\
-					  bonus_old/utils_bonus.c				\
+SRCS_BONUS			= cmd_bonus.c							\
+					  files_bonus.c							\
+					  free_bonus.c							\
+					  here_doc_bonus.c						\
+					  pipex_bonus.c							\
+					  process_bonus.c						\
+					  string_bonus.c						\
+					  split_bonus.c							\
+					  utils_bonus.c							\
 					  get_next_line/get_next_line.c			\
 					  get_next_line/get_next_line_utils.c	
 SRCS_BONUS			:= $(SRCS_BONUS:%=$(SRC_BONUS_DIR)/%)

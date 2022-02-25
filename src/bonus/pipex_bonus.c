@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 23:06:36 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:49:41 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ int	ft_pipex(t_data *data, int status)
 				ft_exit(data, errno, -1);
 		}
 		if (child == 0)
+		{
+
+			printf("IN CHILD[%d] -> CMD[%d] = [%s]\n", i, i, data->cmd[i]);
 			ft_child(data, i);
+		}
 		i ++;
 	}
 	if (WIFEXITED(status))
@@ -64,6 +68,7 @@ void ft_child(t_data *data, int i)
 		ft_exit(data, errno, -1);
 	if (!data->cmd[i])
 		ft_exit(data, 127, i);
+//	printf("IN CHILD[%d] -> CMD[%d] = [%s]\n", i, i, data->cmd[i]);
 	if (execve(data->cmd[i], data->arg_cmd[i], data->env))
 		ft_exit(data, 127, i);
 }
