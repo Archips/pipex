@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:56:18 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/25 15:03:07 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:12:26 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,12 @@ char	**ft_arg_cmd(char *cmd)
 	arg_cmd = ft_split(cmd, ' ');
 	if (!arg_cmd)
 		return (NULL);
+	int i = 0;
+	while (*arg_cmd)
+	{
+		printf("arg_cmd[%d] = [%s]\n", i, *arg_cmd);
+		i ++;
+		arg_cmd ++;
+	}
 	return (arg_cmd);
 }

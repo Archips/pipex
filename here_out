@@ -1,2 +1,20 @@
-IN CHILD[2] -> CMD[2] = [/usr/bin/wc]
-       2
+0
+0
+0
+0
+0
+0
+Entering child[2] with [/usr/bin/wc]
+1
+Entering child[2] with [/usr/bin/wc]
+1
+Entering child[2] with [/usr/bin/wc]
+2
+WE ARE HERE
+Entering child[2] with [/usr/bin/wc]
+2
+Entering child[2] with [/usr/bin/wc]
+1
+WE ARE HERE
+Entering child[2] with [/usr/bin/wc]
+2
