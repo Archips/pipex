@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 20:00:31 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:51:22 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_parent(t_data *data, int status, int child)
 	ft_close(data, data->fd[0]);
 	if (waitpid(child, &status, 0) == -1)
 		ft_exit(data, errno, NULL);
-	if (WIFEXITED(status))
+	if (WIFEXITED(status) == EXIT_FAILURE)
 		status = WEXITSTATUS(status);
 	return (status);
 }	
