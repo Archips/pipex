@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 18:29:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:00:31 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,9 @@ int	main(int argc, char **argv, char **envp)
 		if (data.file_in != -1)
 			ft_close(&data, data.file_in);
 		ft_close(&data, data.file_out);
-		system("leaks pipex");
 		exit(status);
 	}
 	ft_putstr_fd(data.prog_name, 2);
 	ft_putendl_fd(": Error: Arguments missing", 2);
-	system("leaks pipex");
 	exit(status);
 }
