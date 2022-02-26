@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:16:05 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 21:11:44 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:44:47 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 int	ft_is_heredoc(t_data *data, char *here_doc)
 {
 	if (here_doc)
+	{
 		if (ft_strncmp(here_doc, "here_doc", 8) == 0)
 		{
 			data->here_doc = 1;
 			return (1);
-		}	
+		}
+	}
 	data->here_doc = 0;
 	return (0);
 }

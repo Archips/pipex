@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 20:51:22 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:45:45 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int	ft_parent(t_data *data, int status, int child)
 	return (status);
 }	
 
-void ft_child(t_data *data, int i)
+void	ft_child(t_data *data, int i)
 {
-	char *cmd;
-	char **arg_cmd;
+	char	*cmd;
+	char	**arg_cmd;
 
 	ft_close(data, data->fd[0]);
 	if (i == data->nb_cmd - 1)
