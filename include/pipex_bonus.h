@@ -6,9 +6,19 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/25 16:21:13 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 18:10:22 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+ * USAGE 1: ./pipex infile cmd_1 cmd_2 .. cmd_n outfile
+ * -> 		< infile cmd_1 | cmd_2 | .. | cmd_n outfile
+ * USAGE 2: ./pipex here_doc LIMITER cmd_1 cmd_2 file
+ * -> 		cmd_1 << LIMITER | cmd_2 >> file
+ * USAGE 3: ./pipex here_doc LIMITER cmd_1 cmd_2 .. cmd_n file
+ * ->		<< LIMITER cmd_1 | cmd_2 | .. | cmd_n >> file
+*/
+
 
 #ifndef PIPEX_H
 # define PIPEX_H
@@ -73,27 +83,26 @@ char	**ft_get_path(char **envp);
 char	*ft_command(char *cmd, char **env_path);
 char	**ft_arg_cmd(char *cmd);
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
-void	ft_open(t_data *data);
 void	ft_close(t_data *data, int fd);
-void	ft_exit(t_data *data, int error, int cmd_id);
+void	ft_exit(t_data *data, int error, char *cmd);
 void	ft_free_all(t_data *data);
 void	ft_free_pipe(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child(t_data *data, int i);
-void	ft_parent(t_data *data, int i,  int status, int child);
+int	ft_parent(t_data *data, int status, int child);
 
 /*
  * * * files_bonus.c
  */
 
-void	ft_get_files_fd(t_data *data);
+void	ft_open(t_data *data);
 
 
 /*
  * * * here_doc_bonus.c
  */
 
-int		ft_is_heredoc(t_data *data);
+int		ft_is_heredoc(t_data *data, char *here_doc);
 void	ft_here_doc(t_data *data);
 
 

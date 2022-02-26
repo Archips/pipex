@@ -35,7 +35,6 @@ SRCS_BONUS			= cmd_bonus.c							\
 					  free_bonus.c							\
 					  here_doc_bonus.c						\
 					  pipex_bonus.c							\
-					  process_bonus.c						\
 					  string_bonus.c						\
 					  split_bonus.c							\
 					  utils_bonus.c							\

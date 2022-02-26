@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 22:43:00 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/25 20:57:25 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	printf("Outfile fd = [%d]\n", data->file_out);
 	data->nb_cmd = data->ac - 3 - data->here_doc;
 	printf("Nb_cmd = [%d]\n", data->nb_cmd);
+	data->cmd = malloc(sizeof(char *) * data->nb_cmd);
+	/* data->cmd[0] = "salut"; */
+	/* data->cmd[1] = "nonono"; */
+	/* data->cmd[2] = "ollalala"; */
+	/* data->cmd[3] = "ewfihofewiohfw"; */
+	data->arg_cmd = malloc(sizeof(char **) * data->nb_cmd);
+	
 	data->env_path = ft_get_path(data->env);
 	printf("Here_doc = [%d]\n", data->here_doc);
 	if (data->here_doc)

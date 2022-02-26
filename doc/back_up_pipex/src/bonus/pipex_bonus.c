@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/25 11:49:41 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/25 20:58:04 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_pipex(t_data *data, int status)
 		{
 			if (close(data->fd[1]) == -1)
 				ft_exit(data, errno, -1);
-			if (i != 0)
+//			if (i != 0)
 				if (dup2(data->fd[0], STDIN_FILENO) == -1)
 					ft_exit(data, errno, -1);
 			if (close(data->fd[0]) == -1)
