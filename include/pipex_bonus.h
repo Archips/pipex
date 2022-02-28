@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 18:10:22 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 22:14:56 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ char	**ft_arg_cmd(char *cmd);
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
 void	ft_close(t_data *data, int fd);
 void	ft_exit(t_data *data, int error, char *cmd);
-void	ft_free_all(t_data *data);
+void	ft_free_cmd(char *cmd, char **arg_cmd);
 void	ft_free_pipe(t_data *data);
 void	ft_free_tab(char **tab);
-void	ft_child(t_data *data, int i);
+void	ft_child(t_data *data, int ii, char *cmd, char **arg_cmd);
 int	ft_parent(t_data *data, int status, int child);
 
 /*

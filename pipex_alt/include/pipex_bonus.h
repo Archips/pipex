@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/28 16:18:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/28 21:47:58 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_free_all(t_data *data);
 void	ft_free_pipe(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_child(t_data *data, int i);
-int		ft_parent(t_data *data, int i, int status, int child);
+int		ft_parent(t_data *data, int status, int child);
 
 /*
  * * * files_bonus.c

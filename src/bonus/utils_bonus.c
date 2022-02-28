@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 18:12:20 by athirion         ###   ########.fr       */
+/*   Updated: 2022/02/26 22:09:19 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
-		/* ft_free_all(data); */
+		ft_free_tab(data->env_path);
 		exit (127);
 	}
 	else if (error == ENOENT)
@@ -78,6 +78,6 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	}
 	else
 		ft_putendl_fd("error: Something went wrong", 2);
-	/* ft_free_all(data); */
+	ft_free_tab(data->env_path);
 	exit(EXIT_FAILURE);
 }
