@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 16:34:26 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:44:44 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,25 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	data->index = 2 + data->here_doc;
 }
 
+/* int ft_strlen(char *s) */
+/* { */
+/* 	int i; */
+
+/* 	i = 0; */
+/* 	while (s[i]) */
+/* 		i ++; */
+/* 	return (i); */
+/* } */
+
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i ++;
-	}
+	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
-}
+}	
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i ++;
-	}
+	write(fd, s, ft_strlen(s));
 }
 
 void	ft_close(t_data *data, int fd)

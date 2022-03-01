@@ -6,11 +6,11 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 14:54:01 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 15:01:39 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:39:42 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static size_t	ft_count_words(char const *s, char c)
 {

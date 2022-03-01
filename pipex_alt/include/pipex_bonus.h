@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 16:26:32 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:41:32 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,9 @@ char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strrchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-
+int		ft_strlen(char *s);
 char	**ft_get_path(char **envp);
 char	*ft_command(char *cmd, char **env_path);
 char	**ft_arg_cmd(char *cmd);

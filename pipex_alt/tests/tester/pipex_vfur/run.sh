@@ -166,8 +166,8 @@ description="The program compiles"
 printf "${BLUE}# $num: %-69s  []${NC}" "$description"
 if should_execute "${num##0}" "${test_suites[@]}"
 then
-	make bonus -C $PROJECT_DIRECTORY > outs/test-$num.txt 2>&1
-	# make -C $PROJECT_DIRECTORY > outs/test-$num.txt 2>&1
+	# make bonus -C $PROJECT_DIRECTORY > outs/test-$num.txt 2>&1
+	make -C $PROJECT_DIRECTORY > outs/test-$num.txt 2>&1
 	status_code=$?
 	echo -e "Exit status: $status_code`[ $status_code -eq $LEAK_RETURN ] && printf " (Leak special exit code)"`\nExpected: 0" > outs/test-$num-exit.txt
 	if [ $status_code -eq 0 ]

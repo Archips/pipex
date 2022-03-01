@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 17:11:32 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:52:58 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,19 @@ void	ft_child(t_data *data, int i)
 {
 	char	*cmd;
 	char	**arg_cmd;
-	
+
 	if (data->file_in < 0 && i == 0)
 		ft_exit(data, ENOENT, NULL);
 	ft_close(data, data->fd[0]);
 	if (i == data->nb_cmd - 1)
 	{
-		ft_close(data, data->fd[1]);	
+		ft_close(data, data->fd[1]);
 		if (dup2(data->file_out, STDOUT_FILENO) == -1)
 			ft_exit(data, errno, NULL);
 		ft_close(data, data->file_out);
 	}
 	else
 	{
-	//	ft_close(data, data->file_out);
 		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 			ft_exit(data, errno, NULL);
 		ft_close(data, data->fd[1]);
@@ -94,12 +93,13 @@ int	main(int argc, char **argv, char **envp)
 		ft_init_data(argc, argv, envp, &data);
 		if (data.file_in != -1)
 			if (dup2(data.file_in, STDIN_FILENO) == -1)
-				ft_exit(&data, ENOENT, NULL); 
+				ft_exit(&data, ENOENT, NULL);
 		status = ft_pipex(&data, status);
 		if (data.file_in != -1)
 			ft_close(&data, data.file_in);
 		ft_close(&data, data.file_out);
 		ft_free_tab(data.env_path);
+		system("leaks pipex");
 		exit(status);
 	}
 	ft_putstr_fd(data.prog_name, 2);

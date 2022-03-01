@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 21:59:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 16:33:32 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:31:29 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,3 @@ void	ft_open(t_data *data)
 	if (data->file_out == -1)
 		ft_exit(data, errno, NULL);
 }
-
-/* void	ft_open_infile(t_data *data) */
-/* { */
-/* 	if (data->here_doc && data->ac >= 6) */
-/* 		ft_here_doc(data); */
-/* 	else */
-/* 		data->file_in = open(data->av[1], O_RDONLY); */
-/* } */
-
-/* void	ft_open_outfile(t_data *data) */
-/* { */
-/* 	if (data->here_doc) */
-/* 		data->file_out = open */
-/* 			(data->av[data->ac - 1], O_CREAT | O_APPEND | O_RDWR, 0644); */
-/* 	else */
-/* 		data->file_out = open */
-/* 			(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644); */
-/* 	if (data->file_out == -1) */
-/* 		ft_exit(data, errno, NULL); */
-/* } */
-
-	

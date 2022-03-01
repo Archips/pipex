@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:16:05 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/26 21:44:47 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:43:51 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_here_doc(t_data *data)
 	{
 		ft_print_prompt(data);
 		temp = get_next_line(0);
-		if (!temp)
+		if (temp == NULL)
 			ft_exit(data, errno, NULL);
 		if (!ft_strncmp(temp, data->av[2], ft_strlen(data->av[2])))
 			break ;
