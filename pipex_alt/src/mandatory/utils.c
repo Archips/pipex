@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/28 14:57:43 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 15:48:43 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	}
 	data->cmd_id = id;
 	if (access(data->av[1], R_OK))
-		ft_exit(data, errno, -1);
+		if (errno == 13)
+			ft_exit(data, errno, -1);
 }
 
 void	ft_putendl_fd(char *s, int fd)

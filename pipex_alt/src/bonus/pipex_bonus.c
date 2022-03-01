@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/28 22:15:25 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:11:32 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_pipex(t_data *data, int status)
 		if (child == -1)
 			ft_exit(data, errno, NULL);
 		if (child > 0)
-			status = ft_parent(data, status, child);
+			status = ft_parent(data, i, status, child);
 		if (child == 0)
 			ft_child(data, i);
 		i ++;
@@ -35,8 +35,9 @@ int	ft_pipex(t_data *data, int status)
 	return (status);
 }
 
-int	ft_parent(t_data *data, int status, int child)
+int	ft_parent(t_data *data, int i, int status, int child)
 {
+	(void) i;
 	ft_close(data, data->fd[1]);
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 		ft_exit(data, errno, NULL);
@@ -52,7 +53,7 @@ void	ft_child(t_data *data, int i)
 {
 	char	*cmd;
 	char	**arg_cmd;
-
+	
 	if (data->file_in < 0 && i == 0)
 		ft_exit(data, ENOENT, NULL);
 	ft_close(data, data->fd[0]);
@@ -65,6 +66,7 @@ void	ft_child(t_data *data, int i)
 	}
 	else
 	{
+	//	ft_close(data, data->file_out);
 		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 			ft_exit(data, errno, NULL);
 		ft_close(data, data->fd[1]);
