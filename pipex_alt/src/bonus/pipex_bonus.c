@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 17:52:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:50:59 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,19 @@ int	ft_pipex(t_data *data, int status)
 		i ++;
 		data->index ++;
 	}
+	wait(NULL);
 	return (status);
 }
 
 int	ft_parent(t_data *data, int i, int status, int child)
 {
-	(void) i;
 	ft_close(data, data->fd[1]);
 	if (dup2(data->fd[0], STDIN_FILENO) == -1)
 		ft_exit(data, errno, NULL);
 	ft_close(data, data->fd[0]);
-	if (waitpid(child, &status, 0) == -1)
-		ft_exit(data, errno, NULL);
+	if (i == data->nb_cmd - 1)
+		if (waitpid(child, &status, 0) == -1)
+			ft_exit(data, errno, NULL);
 	if (WIFEXITED(status) == EXIT_FAILURE)
 		status = WEXITSTATUS(status);
 	return (status);
@@ -99,7 +100,6 @@ int	main(int argc, char **argv, char **envp)
 			ft_close(&data, data.file_in);
 		ft_close(&data, data.file_out);
 		ft_free_tab(data.env_path);
-		system("leaks pipex");
 		exit(status);
 	}
 	ft_putstr_fd(data.prog_name, 2);

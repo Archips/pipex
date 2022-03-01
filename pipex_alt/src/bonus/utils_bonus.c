@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 18:44:44 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:55:17 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 			ft_exit(data, errno, NULL);
 	data->index = 2 + data->here_doc;
 }
-
-/* int ft_strlen(char *s) */
-/* { */
-/* 	int i; */
-
-/* 	i = 0; */
-/* 	while (s[i]) */
-/* 		i ++; */
-/* 	return (i); */
-/* } */
 
 void	ft_putendl_fd(char *s, int fd)
 {
