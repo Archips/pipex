@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 08:19:47 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 14:25:17 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ int		ft_parent(t_data *data, int i, int status, int child);
  * * * files_bonus.c
  */
 
-void	ft_open(t_data *data);
-void	ft_open_infile(t_data *data);
-void	ft_open_outfile(t_data *data);
+void	ft_open(t_data *data, char **envp);
+/* void	ft_open_infile(t_data *data); */
+/* void	ft_open_outfile(t_data *data); */
 
 
 /*
@@ -105,7 +105,7 @@ void	ft_open_outfile(t_data *data);
  */
 
 int		ft_is_heredoc(t_data *data, char *here_doc);
-void	ft_here_doc(t_data *data);
+void	ft_here_doc(t_data *data, char **envp);
 
 
 /*

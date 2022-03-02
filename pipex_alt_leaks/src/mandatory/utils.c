@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 10:45:42 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:43:04 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 		id ++;
 	}
 	data->cmd_id = id;
-	/* if (access(data->av[1], R_OK)) */
-	/* 	if (errno == 13) */
-	/* 		ft_exit(data, errno, -1); */
 }
 
 void	ft_putendl_fd(char *s, int fd)
@@ -84,23 +81,21 @@ void	ft_exit(t_data *data, int error, int cmd_id)
 	ft_putstr_fd(": ", 2);
 	if (error == 127)
 	{
-		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(data->arg_cmd[cmd_id][0], 2);
+		ft_putstr_fd(": command not found", 2);
 		ft_free_all(data);
 		exit (127);
 	}
 	else if (error == ENOENT)
 	{
-		ft_putstr_fd(strerror(ENOENT), 2);
+		ft_putstr_fd(data->av[1], 2);
 		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(data->av[1], 2);
+		ft_putendl_fd(strerror(ENOENT), 2);
 	}
 	else if (errno)
 	{
 		ft_putstr_fd("error: ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		/* if (error == 126) */
-		/* 	ft_free_all(data); */
 	}
 	else
 		ft_putendl_fd("error: Something went wrong", 2);

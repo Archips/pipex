@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 10:26:21 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:43:16 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	data->av = argv;
 	data->env = envp;
 	data->nb_cmd = data->ac - 3 - data->here_doc;
-	ft_open(data);
+	ft_open(data, envp);
 	data->env_path = ft_get_path(data->env);
-	/* if (access(data->av[1], R_OK)) */
-	/* 	if (errno == 13) */
-	/* 		ft_exit(data, errno, NULL); */
 	data->index = 2 + data->here_doc;
 }
 
@@ -43,14 +40,14 @@ void	ft_close(t_data *data, int fd)
 		ft_exit(data, errno, NULL);
 }
 
-void	ft_exit(t_data *data, int error, char *cmd)
+void	ft_exit(t_data *data, int error, char *str)
 {
 	ft_putstr_fd(data->prog_name, 2);
 	ft_putstr_fd(": ", 2);
 	if (error == 127)
 	{
-		ft_putstr_fd("command not found: ", 2);
-		ft_putendl_fd(cmd, 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(": command not found", 2);
 		free(data->cmd);
 		ft_free_tab(data->arg_cmd);
 		ft_free_tab(data->env_path);
@@ -58,9 +55,9 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	}
 	else if (error == ENOENT)
 	{
-		ft_putstr_fd(strerror(ENOENT), 2);
+		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(data->av[1], 2);
+		ft_putendl_fd(strerror(ENOENT), 2);
 	}
 	else if (errno)
 	{

@@ -56,7 +56,7 @@ CC			= gcc
 CFLAGS		=
 
 # TODO set extra linker flags
-CPPFLAGS	=
+CPPFLAGS	= 
 LDFLAGS		=
 LDLIBS		=
 
@@ -88,6 +88,7 @@ $(NAME): $(OBJS)
 
 bonus: $(OBJS_BONUS)
 	@for f in $(LIB); do $(MAKE) $$f --no-print-directory; done
+	@source $$HOME/git/config/.bashrc
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS_BONUS) $(LDLIBS) -o $(NAME)
 	@$(ECHO)"$(G)created $(END)$(NAME)\n"
 

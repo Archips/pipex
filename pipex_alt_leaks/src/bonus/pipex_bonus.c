@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 10:24:49 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:16:29 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	ft_pipex(t_data *data, int status)
 		i ++;
 		data->index ++;
 	}
-	wait(NULL);
+	i = 0;
+	while (i++ < data->nb_cmd - 1)
+		wait(NULL);
 	return (status);
 }
 
@@ -54,7 +56,7 @@ void	ft_child(t_data *data, int i)
 {
 	if (data->file_in < 0 && i == 0 && !data->here_doc)
 		if (access(data->av[1], R_OK))
-			ft_exit(data, errno, NULL);
+			ft_exit(data, errno, data->av[1]);
 	ft_close(data, data->fd[0]);
 	if (i == data->nb_cmd - 1)
 	{
@@ -92,13 +94,12 @@ int	main(int argc, char **argv, char **envp)
 		ft_init_data(argc, argv, envp, &data);
 		if (data.file_in != -1)
 			if (dup2(data.file_in, STDIN_FILENO) == -1)
-				ft_exit(&data, ENOENT, NULL);
+				ft_exit(&data, ENOENT, data.av[1]);
 		status = ft_pipex(&data, status);
 		if (data.file_in != -1)
 			ft_close(&data, data.file_in);
 		ft_close(&data, data.file_out);
 		ft_free_tab(data.env_path);
-		/* ft_free_tab(data.arg_cmd); */
 		exit(status);
 	}
 	ft_putstr_fd(data.prog_name, 2);

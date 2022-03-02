@@ -6,17 +6,17 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 21:59:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 09:15:21 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 14:22:24 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	ft_open(t_data *data)
+void	ft_open(t_data *data, char **envp)
 {
 	if (data->here_doc && data->ac >= 6)
 	{
-		ft_here_doc(data);
+		ft_here_doc(data, envp);
 		data->file_out = open
 			(data->av[data->ac - 1], O_CREAT | O_APPEND | O_RDWR, 0644);
 	}

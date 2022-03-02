@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:16:05 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/02 10:23:39 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:47:45 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ int	ft_is_heredoc(t_data *data, char *here_doc)
 	return (0);
 }
 
-void	ft_end_heredoc(t_data *data)
+void	ft_end_heredoc(t_data *data, char **envp)
 {
 	char	*line_no;
 
-	while (ft_strncmp("LINENO", *(data->env), 6))
-		data->env++;
-	line_no = ft_strdup(*(data->env) + 7);
+	while (ft_strncmp("LINENO", *envp, 6))
+		envp++;
+	if (!envp)
+	{
+		ft_putstr_fd("Ciao", 2);
+		return ;
+	}
+	line_no = ft_strdup(*(envp) + 7);
 	ft_putstr_fd(data->prog_name, 2);
 	ft_putstr_fd(": here-document at line ", 2);
 	ft_putstr_fd(line_no, 2);
@@ -42,7 +47,7 @@ void	ft_end_heredoc(t_data *data)
 	free(line_no);
 }
 
-void	ft_here_doc(t_data *data)
+void	ft_here_doc(t_data *data, char **envp)
 {
 	char	*temp;
 	int		fd_file;
@@ -56,7 +61,7 @@ void	ft_here_doc(t_data *data)
 		temp = get_next_line(0);
 		if (temp == NULL)
 		{
-			ft_end_heredoc(data);
+			ft_end_heredoc(data, envp);
 			break ;
 		}
 		if (!ft_strncmp(temp, data->av[2], ft_strlen(data->av[2])))
