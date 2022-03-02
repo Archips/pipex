@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 21:59:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 22:32:17 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 09:15:21 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,17 @@ void	ft_open(t_data *data)
 	}
 	else
 	{
-
-		
-		
-		
-		
-		
 		data->file_in = open(data->av[1], O_RDONLY);
 		data->file_out = open
 			(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	}
 	if (data->file_out == -1)
 	{
-		ft_putstr_fd("error: ", 2);
+		ft_putstr_fd(data->prog_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(data->av[data->ac -1], 2);
+		ft_putstr_fd(": ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }

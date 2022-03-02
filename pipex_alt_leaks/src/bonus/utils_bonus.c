@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 22:22:09 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 10:26:21 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 	data->nb_cmd = data->ac - 3 - data->here_doc;
 	ft_open(data);
 	data->env_path = ft_get_path(data->env);
-	if (access(data->av[1], R_OK))
-		if (errno == 13)
-			ft_exit(data, errno, NULL);
+	/* if (access(data->av[1], R_OK)) */
+	/* 	if (errno == 13) */
+	/* 		ft_exit(data, errno, NULL); */
 	data->index = 2 + data->here_doc;
 }
 
@@ -51,6 +51,8 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(cmd, 2);
+		free(data->cmd);
+		ft_free_tab(data->arg_cmd);
 		ft_free_tab(data->env_path);
 		exit (127);
 	}
@@ -64,6 +66,11 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	{
 		ft_putstr_fd("error: ", 2);
 		ft_putendl_fd(strerror(errno), 2);
+		if (error == 126)
+		{
+			free(data->cmd);
+			ft_free_tab(data->arg_cmd);
+		}
 	}
 	else
 		ft_putendl_fd("error: Something went wrong", 2);

@@ -1,0 +1,11 @@
+total 104
+drwxr-xr-x  10 BigZozyo  staff    340  1 mar 21:33 .
+drwxr-xr-x  13 BigZozyo  staff    442  1 mar 21:33 ..
+-rw-r--r--   1 BigZozyo  staff    160 28 fév 21:32 Makefile
+-rw-r--r--   1 BigZozyo  staff    176 28 fév 21:32 README.md
+-rw-r--r--   1 BigZozyo  staff    108 28 fév 21:32 fn_allowed
+-rw-r--r--   1 BigZozyo  staff     96  1 mar 21:32 fn_used
+-rwxrwxrwx   1 BigZozyo  staff      0  1 mar 21:33 infile
+drwxr-xr-x   2 BigZozyo  staff     68  1 mar 21:33 output
+-rwxr-xr-x   1 BigZozyo  staff  14064 28 fév 21:32 pipex
+-rwxr-xr-x   1 BigZozyo  staff  18826 28 fév 21:32 test.sh

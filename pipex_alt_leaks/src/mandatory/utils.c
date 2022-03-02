@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 15:48:43 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/02 10:45:42 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 		id ++;
 	}
 	data->cmd_id = id;
-	if (access(data->av[1], R_OK))
-		if (errno == 13)
-			ft_exit(data, errno, -1);
+	/* if (access(data->av[1], R_OK)) */
+	/* 	if (errno == 13) */
+	/* 		ft_exit(data, errno, -1); */
 }
 
 void	ft_putendl_fd(char *s, int fd)
@@ -67,7 +67,15 @@ void	ft_open(t_data *data)
 	data->file_out = open
 		(data->av[data->ac - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (data->file_out == -1)
-		ft_exit(data, errno, -1);
+	{
+		ft_putstr_fd(data->prog_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(data->av[data->ac -1], 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		ft_free_all(data);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	ft_exit(t_data *data, int error, int cmd_id)
@@ -91,6 +99,8 @@ void	ft_exit(t_data *data, int error, int cmd_id)
 	{
 		ft_putstr_fd("error: ", 2);
 		ft_putendl_fd(strerror(errno), 2);
+		/* if (error == 126) */
+		/* 	ft_free_all(data); */
 	}
 	else
 		ft_putendl_fd("error: Something went wrong", 2);
