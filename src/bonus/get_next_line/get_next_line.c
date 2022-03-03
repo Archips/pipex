@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 09:58:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 15:41:09 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:30:04 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ char	*get_next_line(int fd)
 	char		*buf;
 	int			ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
 		return (NULL);
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buf = (char *)malloc(sizeof(char) * (2));
 	if (!buf)
 		return (NULL);
 	ret = 1;
 	while (ret && !ft_is_nl(temp))
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
+		ret = read(fd, buf, 1);
 		if (ret == -1)
 			return (free(buf), NULL);
 		buf[ret] = '\0';

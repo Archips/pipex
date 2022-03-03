@@ -18,9 +18,10 @@ INC			= $(INC_DIR) \
 # TODO set sources
 SRC_DIR		= src
 SRCS		= mandatory/cmd.c						\
+			  mandatory/error.c						\
+			  mandatory/files.c						\
 			  mandatory/free.c						\
 			  mandatory/pipex.c						\
-			  mandatory/process.c					\
 			  mandatory/split.c						\
 			  mandatory/string.c					\
 			  mandatory/utils.c						
@@ -31,10 +32,11 @@ OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_BONUS_DIR		= src/bonus
 SRCS_BONUS			= cmd_bonus.c							\
+					  close_bonus.c							\
+					  error_bonus.c							\
 					  files_bonus.c							\
 					  free_bonus.c							\
 					  here_doc_bonus.c						\
-					  itoa_bonus.c							\
 					  pipex_bonus.c							\
 					  string_bonus.c						\
 					  split_bonus.c							\
@@ -56,7 +58,7 @@ CC			= gcc
 CFLAGS		=
 
 # TODO set extra linker flags
-CPPFLAGS	=
+CPPFLAGS	= 
 LDFLAGS		=
 LDLIBS		=
 
@@ -122,6 +124,10 @@ update:
 	@git pull
 	@git submodule update
 	@$(ECHO)"$(G)updated$(END)\n"
+
+leak:
+	@bash test/leak_test.sh
+
 
 re : fclean all
 

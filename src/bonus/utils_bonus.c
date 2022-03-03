@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 13:54:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/01 18:33:12 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:51:31 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,18 @@ void	ft_init_data(int argc, char **argv, char **envp, t_data *data)
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i ++;
-	}
+	write(fd, s, ft_strlen(s));
 	write(fd, "\n", 1);
-}
+}	
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i ++;
-	}
+	write(fd, s, ft_strlen(s));
 }
 
-void	ft_close(t_data *data, int fd)
+void	ft_dup(t_data *data, int fd, int std)
 {
-	if (close(fd) == -1)
+	if (dup2(fd, std) == -1)
 		ft_exit(data, errno, NULL);
 }
 
@@ -59,18 +45,9 @@ void	ft_exit(t_data *data, int error, char *cmd)
 	ft_putstr_fd(data->prog_name, 2);
 	ft_putstr_fd(": ", 2);
 	if (error == 127)
-	{
-		ft_putstr_fd("command not found: ", 2);
-		ft_putendl_fd(cmd, 2);
-		ft_free_tab(data->env_path);
-		exit (127);
-	}
-	else if (error == ENOENT)
-	{
-		ft_putstr_fd(strerror(ENOENT), 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(data->av[1], 2);
-	}
+		ft_cmd_error(data, cmd, error);
+	else if (error == 126)
+		ft_cmd_error(data, cmd, error);
 	else if (errno)
 	{
 		ft_putstr_fd("error: ", 2);

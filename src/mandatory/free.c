@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/24 14:50:25 by athirion          #+#    #+#             */
-/*   Updated: 2022/02/24 14:52:30 by athirion         ###   ########.fr       */
+/*   Created: 2022/02/21 10:10:35 by athirion          #+#    #+#             */
+/*   Updated: 2022/03/03 11:27:32 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 void	ft_free_all(t_data *data)
 {
-	int	i;
-
-	i = 0;
 	ft_free_tab(data->env_path);
-	while (i < data->cmd_id)
-	{
-		free(data->cmd[i]);
-		ft_free_tab(data->arg_cmd[i]);
-		i ++;
-	}
 }
 
 void	ft_free_tab(char **tab)
