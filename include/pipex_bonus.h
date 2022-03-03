@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 16:49:58 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:56:24 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
  * ->		<< LIMITER cmd_1 | cmd_2 | .. | cmd_n >> file
 */
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -49,15 +48,6 @@ typedef struct s_data
 }				t_data;
 
 /*
- * close_bonus.c
- */
-
-void	ft_close(t_data *data, int *fd);
-void	ft_close_fd(t_data *data);
-void	ft_close_std(void);
-void	ft_close_all(t_data *data);
-
-/*
  * cmd_bonus.c
  */
 
@@ -71,18 +61,37 @@ char	**ft_arg_cmd(char *cmd);
 
 void	ft_file_error(t_data *data, int infile, int error);
 void	ft_cmd_error(t_data *data, char *cmd, int error);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_exit(t_data *data, int error, char *cmd);
 
 /*
  * files_bonus.c
  */
 
 void	ft_open(t_data *data);
+void	ft_close(t_data *data, int *fd);
+void	ft_close_fd(t_data *data);
+void	ft_close_std(void);
+void	ft_close_all(t_data *data);
 
 /*
  * free_bonus.c
  */
 
 void	ft_free_tab(char **tab);
+
+/*
+ * get_next_line/_utils.c
+ */
+
+char	*get_next_line(int fd);
+char	*ft_get_line(char *temp);
+char	*ft_update_temp(char *temp);
+int		ft_len_newline(char *str);
+int		ft_is_nl(char *str);
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 /*
  * here_doc_bonus.c
@@ -93,44 +102,34 @@ void	ft_end_heredoc(t_data *data);
 void	ft_here_doc(t_data *data);
 
 /*
+ * main_bonus.c
+ */
+
+void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
+
+/*
  * pipex_bonus.c
  */
 
 int		ft_pipex(t_data *data, int status);
 int		ft_parent(t_data *data, int i, int status, int child);
 void	ft_child(t_data *data, int i);
+void	ft_dup(t_data *data, int fd, int std);
 
 /*
- * utils_bonus.c
+ * split_bonus.c
  */
 
-void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
-void	ft_dup(t_data *data, int fd, int std);
-void	ft_exit(t_data *data, int error, char *cmd);
+char	**ft_split(char const *s, char c);
 
 /*
- * LIB C FUNCTIONS
+ * string_bonus.c
  */
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	**ft_split(char const *s, char c);
 char	*ft_strrchr(const char *s, int c);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
-
-/*
- * GET_NEXT_LINE FUNCTIONS
- */
-
-char	*get_next_line(int fd);
-char	*ft_get_line(char *temp);
-char	*ft_update_temp(char *temp);
-int		ft_len_newline(char *str);
-int		ft_is_nl(char *str);
-char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
-char	*ft_strjoin_free(char *s1, char *s2);
 
 #endif

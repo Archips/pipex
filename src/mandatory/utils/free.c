@@ -6,16 +6,11 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:10:35 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 11:27:32 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:01:58 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_free_all(t_data *data)
-{
-	ft_free_tab(data->env_path);
-}
 
 void	ft_free_tab(char **tab)
 {

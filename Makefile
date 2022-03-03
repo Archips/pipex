@@ -16,15 +16,15 @@ INC			= $(INC_DIR) \
 			  $(LIB:%=%/$(INC_DIR))
 
 # TODO set sources
-SRC_DIR		= src
-SRCS		= mandatory/cmd.c						\
-			  mandatory/error.c						\
-			  mandatory/files.c						\
-			  mandatory/free.c						\
-			  mandatory/pipex.c						\
-			  mandatory/split.c						\
-			  mandatory/string.c					\
-			  mandatory/utils.c						
+SRC_DIR		= src/mandatory
+SRCS		= cmd.c						\
+			  error.c					\
+			  files.c					\
+			  main.c					\
+			  pipex.c					\
+			  utils/free.c				\
+			  utils/split.c				\
+			  utils/string.c						
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
 OBJ_DIR 	= obj
@@ -32,17 +32,16 @@ OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 SRC_BONUS_DIR		= src/bonus
 SRCS_BONUS			= cmd_bonus.c							\
-					  close_bonus.c							\
 					  error_bonus.c							\
+					  main_bonus.c							\
 					  files_bonus.c							\
-					  free_bonus.c							\
 					  here_doc_bonus.c						\
 					  pipex_bonus.c							\
-					  string_bonus.c						\
-					  split_bonus.c							\
-					  utils_bonus.c							\
 					  get_next_line/get_next_line.c			\
-					  get_next_line/get_next_line_utils.c	
+					  get_next_line/get_next_line_utils.c	\
+					  utils/free_bonus.c					\
+					  utils/split_bonus.c					\
+					  utils/string_bonus.c	
 SRCS_BONUS			:= $(SRCS_BONUS:%=$(SRC_BONUS_DIR)/%)
 
 OBJ_BONUS_DIR	 	= obj

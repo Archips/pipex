@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 10:51:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 16:50:46 by athirion         ###   ########.fr       */
+/*   Created: 2022/03/03 20:14:52 by athirion          #+#    #+#             */
+/*   Updated: 2022/03/03 20:25:49 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	ft_parent(t_data *data, int i, int status, int child)
 	if (WIFEXITED(status) == EXIT_FAILURE)
 		status = WEXITSTATUS(status);
 	return (status);
-}	
+}
 
 void	ft_child(t_data *data, int i)
 {
 	if (data->file_in < 0 && i == 0 && !data->here_doc)
-	{	
+	{
 		ft_free_tab(data->env_path);
 		ft_close_all(data);
 		exit(EXIT_FAILURE);
@@ -80,31 +80,8 @@ void	ft_child(t_data *data, int i)
 		ft_exit(data, 126, data->arg_cmd[0]);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	ft_dup(t_data *data, int fd, int std)
 {
-	t_data	data;
-	int		status;
-
-	data.prog_name = ft_strrchr(argv[0], '/') + 1;
-	status = 1;
-	if (argc >= 5 + ft_is_heredoc(&data, argv[1]))
-	{
-		status = 0;
-		if (!envp)
-			exit(EXIT_FAILURE);
-		ft_init_data(argc, argv, envp, &data);
-		if (data.file_in != -1)
-			if (dup2(data.file_in, STDIN_FILENO) == -1)
-				ft_exit(&data, ENOENT, data.av[1]);
-		status = ft_pipex(&data, status);
-		if (data.file_in != -1)
-			ft_close(&data, &data.file_in);
-		ft_close(&data, &data.file_out);
-		ft_free_tab(data.env_path);
-		ft_close_std();
-		exit(status);
-	}
-	ft_putstr_fd(data.prog_name, 2);
-	ft_putendl_fd(": Error: Arguments missing", 2);
-	exit(status);
+	if (dup2(fd, std) == -1)
+		ft_exit(data, errno, NULL);
 }
