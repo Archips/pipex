@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:14:52 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 20:25:49 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/05 10:12:53 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_parent(t_data *data, int i, int status, int child)
 
 void	ft_child(t_data *data, int i)
 {
-	if (data->file_in < 0 && i == 0 && !data->here_doc)
+	if (data->file_in < 0 && i == 0)
 	{
 		ft_free_tab(data->env_path);
 		ft_close_all(data);

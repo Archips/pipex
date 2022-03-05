@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 20:56:24 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/05 10:06:10 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_close_all(t_data *data);
 void	ft_free_tab(char **tab);
 
 /*
- * get_next_line/_utils.c
+ * get_next_line_bonus.c / get_next_line_utils_bonus.c
  */
 
 char	*get_next_line(int fd);

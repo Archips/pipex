@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:16:05 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 16:33:31 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/05 09:34:06 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_here_doc(t_data *data)
 	char	*temp;
 	int		fd_file;
 
-	fd_file = open(".temp_here_doc", O_CREAT | O_TRUNC | O_RDWR, 0644);
+	fd_file = open("/tmp/temp_heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (fd_file == -1)
 		ft_exit(data, errno, NULL);
 	while (1)
@@ -58,6 +58,6 @@ void	ft_here_doc(t_data *data)
 	}
 	free(temp);
 	ft_close(data, &fd_file);
-	data->file_in = open(".temp_here_doc", O_RDONLY);
-	unlink(".temp_here_doc");
+	data->file_in = open("/tmp/temp_heredoc", O_RDONLY);
+	unlink("/tmp/temp_heredoc");
 }

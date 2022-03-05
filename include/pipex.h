@@ -6,7 +6,7 @@
 /*   By: athirion <athirion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 10:36:19 by athirion          #+#    #+#             */
-/*   Updated: 2022/03/03 21:14:36 by athirion         ###   ########.fr       */
+/*   Updated: 2022/03/05 10:02:51 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_data
 }				t_data;
 
 /*
- * cmd_bonus.c
+ * cmd.c
  */
 
 char	**ft_get_path(char **envp);
@@ -52,7 +52,7 @@ char	*ft_command(char *cmd, char **env_path);
 char	**ft_arg_cmd(char *cmd);
 
 /*
- * error_bonus.c
+ * error.c
  */
 
 void	ft_file_error(t_data *data, int infile, int error);
@@ -62,7 +62,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_exit(t_data *data, int error, char *cmd);
 
 /*
- * files_bonus.c
+ * files.c
  */
 
 void	ft_open(t_data *data);
@@ -72,19 +72,19 @@ void	ft_close_std(void);
 void	ft_close_all(t_data *data);
 
 /*
- * free_bonus.c
+ * free.c
  */
 
 void	ft_free_tab(char **tab);
 
 /*
- * main_bonus.c
+ * main.c
  */
 
 void	ft_init_data(int argc, char **argv, char **envp, t_data *data);
 
 /*
- * pipex_bonus.c
+ * pipex.c
  */
 
 int		ft_pipex(t_data *data, int status);
@@ -93,13 +93,13 @@ void	ft_child(t_data *data, int i);
 void	ft_dup(t_data *data, int fd, int std);
 
 /*
- * split_bonus.c
+ * split.c
  */
 
 char	**ft_split(char const *s, char c);
 
 /*
- * string_bonus.c
+ * string.c
  */
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
