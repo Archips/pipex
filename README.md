@@ -2,6 +2,10 @@
 
 Pipex is a C programming project that simulates the behavior of shell pipes, allowing you to redirect and process data between specified shell commands. It aims to deepen your understanding of UNIX mechanisms by implementing them within your own program.
 
+## Score
+
+-  125%
+
 ## Project Highlight
 - Pipex replicates the functionality of the shell command `< file1 cmd1 | cmd2 > file2`, enabling seamless data transfer and manipulation between two specified shell commands through your program.
 - The bonus part handles multiple pipes `< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2`
